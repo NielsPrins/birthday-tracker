@@ -10,3 +10,19 @@
 .addButton {
     width: 2.25em;
 }
+
+.birthday {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 0.5em;
+    gap: 0.5em;
+}
+
+.birthday:hover {
+    background-color: var(--primary-color);
+    border-radius: 0.25rem;
+}
+
+.birthdayName {
+    font-weight: 700;
+}

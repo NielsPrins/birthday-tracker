@@ -5,6 +5,7 @@ export default function Home() {
   return (
     <main>
       <h1>Birthdays</h1>
+
       <div className={styles.searchContainer}>
         <input className={styles.search} type="text" placeholder="Search"/>
         <button className={styles.addButton}>
@@ -13,6 +14,17 @@ export default function Home() {
           </svg>
         </button>
       </div>
+
+      <div className={styles.birthday}>
+        <div>
+          <div className={styles.birthdayName}>[name]</div>
+          <div>[age] year</div>
+        </div>
+        <div>
+          [daysLeft] days
+        </div>
+      </div>
+
     </main>
   )
 }
