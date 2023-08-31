@@ -1,7 +1,9 @@
 import styles from './page.module.css'
+import { Birthday } from "@/lib/interfaces/birthday"
 
+export default async function Home() {
+  const birthdays: Birthday[] = await fetch(process.env.URL + '/api').then(res => res.json());
 
-export default function Home() {
   return (
     <main>
       <h1>Birthdays</h1>
@@ -15,15 +17,17 @@ export default function Home() {
         </button>
       </div>
 
-      <div className={styles.birthday}>
-        <div>
-          <div className={styles.birthdayName}>[name]</div>
-          <div>[age] year</div>
+      {birthdays.map((birthday) => {
+        return <div className={styles.birthday}>
+          <div>
+            <div className={styles.birthdayName}>{birthday.name}</div>
+            <div>[age] year</div>
+          </div>
+          <div>
+            [daysLeft] days
+          </div>
         </div>
-        <div>
-          [daysLeft] days
-        </div>
-      </div>
+      })}
 
     </main>
   )
