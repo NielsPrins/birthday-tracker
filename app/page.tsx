@@ -2,7 +2,7 @@ import styles from './page.module.css'
 import { Birthday } from "@/lib/interfaces/birthday"
 
 export default async function Home() {
-  const birthdays: Birthday[] = await fetch(process.env.URL + '/api').then(res => res.json());
+  const birthdays: Birthday[] = await fetch(process.env.URL + '/api/birthdays').then(res => res.json());
 
   return (
     <main>
