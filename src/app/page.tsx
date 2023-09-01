@@ -1,8 +1,8 @@
 import styles from './page.module.css'
-import { Birthday } from "@/lib/interfaces/birthday"
+import { prisma } from "@/src/db";
 
 export default async function Home() {
-  const birthdays: Birthday[] = await fetch(process.env.URL + '/api/birthdays').then(res => res.json());
+  const birthdays = await prisma.birthday.findMany();
 
   return (
     <main>

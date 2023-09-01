@@ -1,5 +1,10 @@
 :root {
     --primary-color: hsl(223, 100%, 67%);
+    --primary-color-h: 223;
+    --primary-color-s: 100%;
+    --primary-color-l: 67%;
+    --primary-color-dark: hsl(var(--primary-color-h), var(--primary-color-s), calc(var(--primary-color-l) - 2%)
+    );
 }
 
 *, ::after, ::before {
@@ -43,7 +48,7 @@ main {
 input, button {
     height: 2.25em;
     background-color: #FFFFFF;
-    color: #000;
+    color: #000000;
     padding: 0.5em;
     font-family: inherit;
     font-size: 1em;
@@ -52,7 +57,19 @@ input, button {
     border: none;
 }
 
+button {
+    cursor: pointer;
+}
+
 input:hover, input:focus, button:hover, button:focus {
-    border-color: var(--primary-color);
     box-shadow: 0 0 0 3px var(--primary-color);
+}
+
+button.fill {
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+}
+
+button.fill:hover, button.fill:focus {
+    box-shadow: 0 0 0 3px hsla(var(--primary-color-h), var(--primary-color-s), var(--primary-color-l), 0.5);
 }
