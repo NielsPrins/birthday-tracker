@@ -26,12 +26,12 @@ export default async function register(formData: FormData) {
   });
 
   const agendaToken = generateBase64ID(20);
-  const password_hash = await hashPassword(data.password);
+  const passwordHash = await hashPassword(data.password);
 
   await prisma.auth.create({
     data: {
-      agenda_token: agendaToken,
-      password_hash: password_hash
+      agendaToken: agendaToken,
+      passwordHash: passwordHash
     }
   });
 

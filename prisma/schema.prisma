@@ -7,16 +7,16 @@ datasource db {
   url      = "file:database.db"
 }
 
-model auth {
-  id            Int    @id @default(autoincrement())
-  password_hash String
-  agenda_token  String
+model Auth {
+  id           Int    @id @default(autoincrement())
+  passwordHash String
+  agendaToken  String
 }
 
-model birthday {
-  id         String @id
-  name       String
-  day        Int
-  month      Int
-  birth_year Int?
+model Birthdate {
+  id        String @id
+  name      String
+  day       Int
+  month     Int
+  birthYear Int?
 }
