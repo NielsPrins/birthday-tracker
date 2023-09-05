@@ -18,7 +18,7 @@ export default async function Home() {
       </div>
 
       {birthdays.map((birthday) => {
-        return <div className={styles.birthday}>
+        return <div key={birthday.id} className={styles.birthday}>
           <div>
             <div className={styles.birthdayName}>{birthday.name}</div>
             <div>[age] year</div>
