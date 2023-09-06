@@ -1,5 +1,5 @@
-import { getBirthdays } from "@/src/app/birthdays-overview-functions";
-import BirthdaysOverview from "@/src/app/birthdays-overview";
+import { getBirthdays } from '@/src/app/birthdays-overview-functions';
+import BirthdaysOverview from '@/src/app/birthdays-overview';
 
 export default async function Home() {
   const birthdays = await getBirthdays();
@@ -10,5 +10,5 @@ export default async function Home() {
 
       <BirthdaysOverview birthdates={birthdays}></BirthdaysOverview>
     </main>
-  )
+  );
 }

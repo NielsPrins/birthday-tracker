@@ -1,75 +1,83 @@
 :root {
-    --primary-color: hsl(223, 100%, 67%);
-    --primary-color-h: 223;
-    --primary-color-s: 100%;
-    --primary-color-l: 67%;
-    --primary-color-dark: hsl(var(--primary-color-h), var(--primary-color-s), calc(var(--primary-color-l) - 2%)
-    );
+  --primary-color: hsl(223, 100%, 67%);
+  --primary-color-h: 223;
+  --primary-color-s: 100%;
+  --primary-color-l: 67%;
+  --primary-color-dark: hsl(var(--primary-color-h), var(--primary-color-s), calc(var(--primary-color-l) - 2%));
 }
 
-*, ::after, ::before {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html,
 body {
-    background-color: #1F1F1F;
-    color: #FFFFFF;
-    -webkit-font-smoothing: antialiased;
+  background-color: #1f1f1f;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
 }
 
 main {
-    display: grid;
-    gap: 1em;
-    width: 100%;
-    max-width: 400px;
-    margin: 2em auto;
-    background-color: #2C2D34;
-    border-radius: 2rem;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08), 0 6px 16px rgba(0, 0, 0, 0.12);
-    padding: 2em;
+  display: grid;
+  gap: 1em;
+  width: 100%;
+  max-width: 400px;
+  margin: 2em auto;
+  background-color: #2c2d34;
+  border-radius: 2rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08),
+  0 6px 16px rgba(0, 0, 0, 0.12);
+  padding: 2em;
 }
 
 @media only screen and (max-width: 400px) {
-    html, body {
-        background-color: #2C2D34;
-    }
+  html,
+  body {
+    background-color: #2c2d34;
+  }
 
-    main {
-        margin: 0;
-        border-radius: 0;
-        box-shadow: none;
-        padding: 2em 1em;
-    }
+  main {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 2em 1em;
+  }
 }
 
-input, button {
-    height: 2.25em;
-    background-color: #FFFFFF;
-    color: #000000;
-    padding: 0.5em;
-    font-family: inherit;
-    font-size: 1em;
-    outline: none;
-    border-radius: 0.25rem;
-    border: none;
+input,
+button {
+  height: 2.25em;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 0.5em;
+  font-family: inherit;
+  font-size: 1em;
+  outline: none;
+  border-radius: 0.25rem;
+  border: none;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-input:hover, input:focus, button:hover, button:focus {
-    box-shadow: 0 0 0 3px var(--primary-color);
+input:hover,
+input:focus,
+button:hover,
+button:focus {
+  box-shadow: 0 0 0 3px var(--primary-color);
 }
 
 button.fill {
-    background-color: var(--primary-color);
-    color: #FFFFFF;
+  background-color: var(--primary-color);
+  color: #ffffff;
 }
 
-button.fill:hover, button.fill:focus {
-    box-shadow: 0 0 0 3px hsla(var(--primary-color-h), var(--primary-color-s), var(--primary-color-l), 0.5);
+button.fill:hover,
+button.fill:focus {
+  box-shadow: 0 0 0 3px hsla(var(--primary-color-h), var(--primary-color-s), var(--primary-color-l), 0.5);
 }

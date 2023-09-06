@@ -1,11 +1,11 @@
-import { prisma } from "@/src/db";
-import { redirect } from "next/navigation";
-import Form from "@/src/app/auth/login/form";
+import { prisma } from '@/src/db';
+import { redirect } from 'next/navigation';
+import Form from '@/src/app/auth/login/form';
 
 export default async function RegisterPage() {
   const authRecord = await prisma.auth.findFirst();
   if (!authRecord) {
-    redirect('/auth/register')
+    redirect('/auth/register');
   }
 
   return (
@@ -14,5 +14,5 @@ export default async function RegisterPage() {
 
       <Form></Form>
     </main>
-  )
+  );
 }

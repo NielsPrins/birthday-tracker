@@ -1,6 +1,5 @@
-import { prisma } from "@/src/db";
-import type { Birthdate } from '@prisma/client'
-
+import { prisma } from '@/src/db';
+import type { Birthdate } from '@prisma/client';
 
 export function getNewAge(birthdate: Birthdate): number | null {
   if (!birthdate.birthYear) return null;
@@ -40,23 +39,17 @@ export async function getBirthdays() {
   const today = new Date();
 
   return [
-    ...await prisma.birthdate.findMany({
+    ...(await prisma.birthdate.findMany({
       where: {
-        OR: [
-          { month: { gt: today.getUTCMonth() + 1 } },
-          { month: { gte: today.getUTCMonth() + 1 }, day: { gte: today.getUTCDay() } }
-        ]
+        OR: [{ month: { gt: today.getUTCMonth() + 1 } }, { month: { gte: today.getUTCMonth() + 1 }, day: { gte: today.getUTCDay() } }],
       },
-      orderBy: [{ month: 'asc' }, { day: 'asc' }]
-    }),
-    ...await prisma.birthdate.findMany({
+      orderBy: [{ month: 'asc' }, { day: 'asc' }],
+    })),
+    ...(await prisma.birthdate.findMany({
       where: {
-        OR: [
-          { month: { lt: today.getUTCMonth() + 1 } },
-          { month: { lte: today.getUTCMonth() + 1 }, day: { lt: today.getUTCDay() } }
-        ]
+        OR: [{ month: { lt: today.getUTCMonth() + 1 } }, { month: { lte: today.getUTCMonth() + 1 }, day: { lt: today.getUTCDay() } }],
       },
-      orderBy: [{ month: 'asc' }, { day: 'asc' }]
-    })
+      orderBy: [{ month: 'asc' }, { day: 'asc' }],
+    })),
   ];
 }

@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import styles from './page.module.css'
-import register from "@/src/app/auth/register/register";
-import React, { useState } from "react";
+import styles from './page.module.css';
+import register from '@/src/app/auth/register/register';
+import React, { useState } from 'react';
 
 export default function Form() {
   const [loading, setLoading] = useState(false);
@@ -27,16 +27,13 @@ export default function Form() {
 
   return (
     <form onSubmit={onSubmit} className={styles.form}>
+      {error && <div>Something went wrong.</div>}
 
-      {error &&
-          <div>
-              Something went wrong.
-          </div>
-      }
-
-      <input type="password" placeholder="Password" name="password" autoFocus/>
-      <input type="password" placeholder="Confirm password" name="confirmPassword"/>
-      <button type="submit" className="fill">Submit</button>
+      <input type='password' placeholder='Password' name='password' autoFocus />
+      <input type='password' placeholder='Confirm password' name='confirmPassword' />
+      <button type='submit' className='fill'>
+        Submit
+      </button>
     </form>
-  )
+  );
 }

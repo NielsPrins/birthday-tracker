@@ -1,17 +1,17 @@
-'use server'
+'use server';
 
-import { redirect } from "next/navigation";
-import { prisma } from "@/src/db";
-import checkPassword from "./check-password";
-import { cookies } from "next/headers";
-import { SignJWT } from "jose";
+import { redirect } from 'next/navigation';
+import { prisma } from '@/src/db';
+import checkPassword from './check-password';
+import { cookies } from 'next/headers';
+import { SignJWT } from 'jose';
 
 export default async function login(formData: FormData) {
   const password = String(formData.get('password'));
 
   const authRecord = await prisma.auth.findFirst();
   if (!authRecord) {
-    redirect('/auth/register')
+    redirect('/auth/register');
   }
 
   const validPassword = await checkPassword(authRecord.passwordHash, password);
@@ -38,9 +38,9 @@ export default async function login(formData: FormData) {
     value: token,
     httpOnly: true,
     path: '/',
-    secure: process.env.NODE_ENV !== "development",
+    secure: process.env.NODE_ENV !== 'development',
     maxAge: tokenMaxAge,
   });
 
-  redirect('/')
+  redirect('/');
 }

@@ -1,28 +1,28 @@
 .searchContainer {
-    display: flex;
-    gap: 0.5em;
+  display: flex;
+  gap: 0.5em;
 }
 
 .search {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .addButton {
-    width: 2.25em;
+  width: 2.25em;
 }
 
 .birthday {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    padding: 0.5em;
-    gap: 0.5em;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 0.5em;
+  gap: 0.5em;
 }
 
 .birthday:hover {
-    background-color: var(--primary-color);
-    border-radius: 0.25rem;
+  background-color: var(--primary-color);
+  border-radius: 0.25rem;
 }
 
 .birthdayName {
-    font-weight: 700;
+  font-weight: 700;
 }
