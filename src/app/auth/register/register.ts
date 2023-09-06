@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import generateBase64ID from "@/src/generate-base-64-id";
-import hashPassword from "@/src/hash-password";
+import hashPassword from "./hash-password";
 import { redirect } from "next/navigation";
 import { prisma } from "@/src/db";
 
