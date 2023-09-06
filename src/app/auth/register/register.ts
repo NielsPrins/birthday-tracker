@@ -2,9 +2,9 @@
 
 import { z } from 'zod';
 import generateBase64ID from '@/src/generate-base-64-id';
-import hashPassword from './hash-password';
 import { redirect } from 'next/navigation';
 import { prisma } from '@/src/db';
+import bcrypt from 'bcrypt';
 
 const schema = z
   .object({
@@ -38,4 +38,16 @@ export default async function register(formData: FormData) {
   });
 
   redirect('/');
+}
+
+function hashPassword(password: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    bcrypt.hash(password, 12, (err, hash) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(hash);
+      }
+    });
+  });
 }

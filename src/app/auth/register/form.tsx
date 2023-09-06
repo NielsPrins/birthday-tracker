@@ -1,6 +1,5 @@
 'use client';
 
-import styles from './page.module.css';
 import register from '@/src/app/auth/register/register';
 import React, { useState } from 'react';
 
@@ -26,7 +25,7 @@ export default function Form() {
   }
 
   return (
-    <form onSubmit={onSubmit} className={styles.form}>
+    <form onSubmit={onSubmit}>
       {error && <div>Something went wrong.</div>}
 
       <input type='password' placeholder='Password' name='password' autoFocus />

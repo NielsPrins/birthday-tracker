@@ -48,6 +48,11 @@ main {
   }
 }
 
+form {
+  display: grid;
+  gap: 1em;
+}
+
 input,
 button {
   height: 2.25em;

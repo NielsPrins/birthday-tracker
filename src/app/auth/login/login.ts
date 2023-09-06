@@ -2,9 +2,9 @@
 
 import { redirect } from 'next/navigation';
 import { prisma } from '@/src/db';
-import checkPassword from './check-password';
 import { cookies } from 'next/headers';
 import { SignJWT } from 'jose';
+import bcrypt from 'bcrypt';
 
 export default async function login(formData: FormData) {
   const password = String(formData.get('password'));
@@ -43,4 +43,16 @@ export default async function login(formData: FormData) {
   });
 
   redirect('/');
+}
+
+function checkPassword(hash: string, password: string): Promise<boolean> {
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(password, hash, (err, isValid) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(isValid);
+      }
+    });
+  });
 }
