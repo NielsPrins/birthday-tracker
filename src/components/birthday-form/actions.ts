@@ -6,15 +6,15 @@ import { prisma } from '@/src/db';
 import generateBase64ID from '@/src/generate-base-64-id';
 import moment from 'moment';
 
-const schema = z.object({
-  name: z.string().min(1),
-  day: z.string().transform(Number),
-  month: z.string().transform(Number),
-  birthYear: z.number().nullable(),
-});
+export async function addOrEditBirthday(formData: FormData, birthdateId?: string) {
+  const birthdaySchema = z.object({
+    name: z.string().min(1),
+    day: z.string().transform(Number),
+    month: z.string().transform(Number),
+    birthYear: z.number().nullable(),
+  });
 
-export default async function addOrEditBirthday(formData: FormData, birthdateId?: string) {
-  const data = schema.parse({
+  const data = birthdaySchema.parse({
     name: formData.get('name'),
     day: formData.get('day'),
     month: formData.get('month'),
@@ -44,6 +44,14 @@ export default async function addOrEditBirthday(formData: FormData, birthdateId?
       data: { id: generateBase64ID(), name: name, day: day, month: month, birthYear: birthYear },
     });
   }
+
+  redirect('/');
+}
+
+export async function deleteBirthday(birthdateId: string) {
+  await prisma.birthdate.delete({
+    where: { id: birthdateId },
+  });
 
   redirect('/');
 }

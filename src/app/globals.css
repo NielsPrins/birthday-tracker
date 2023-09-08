@@ -69,6 +69,7 @@ button {
   outline: none;
   border-radius: 0.25rem;
   border: none;
+  -webkit-appearance: none;
 }
 
 input::-webkit-outer-spin-button,
