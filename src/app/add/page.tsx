@@ -1,11 +1,11 @@
-import Form from '@/src/app/add/form';
+import BirthdayForm from '@/src/components/birthday-form/birthday-form';
 
-export default async function Home() {
+export default async function AddPage() {
   return (
     <main>
       <h1>Add birthday</h1>
 
-      <Form></Form>
+      <BirthdayForm></BirthdayForm>
     </main>
   );
 }

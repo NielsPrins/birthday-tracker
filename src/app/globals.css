@@ -48,6 +48,11 @@ main {
   }
 }
 
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 form {
   display: grid;
   gap: 1em;

@@ -34,13 +34,13 @@ export default function BirthdaysOverview(props: Props) {
         const newAge = getNewAge(birthday);
 
         return (
-          <div key={birthday.id} className={styles.birthday}>
+          <Link key={birthday.id} href={`edit/${birthday.id}`} className={styles.birthday}>
             <div>
               <div className={styles.birthdayName}>{birthday.name}</div>
               {newAge && <div>{newAge} years</div>}
             </div>
             <div>{daysUntilBirthday(birthday)} days</div>
-          </div>
+          </Link>
         );
       })}
     </>

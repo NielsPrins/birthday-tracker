@@ -13,12 +13,12 @@ const schema = z.object({
   birthYear: z.number().nullable(),
 });
 
-export default async function add(formData: FormData) {
+export default async function addOrEditBirthday(formData: FormData, birthdateId?: string) {
   const data = schema.parse({
     name: formData.get('name'),
     day: formData.get('day'),
     month: formData.get('month'),
-    birthYear: Number(formData.get('birthYear')) ?? null,
+    birthYear: formData.has('birthYear') ? Number(formData.get('birthYear')) : null,
   });
 
   const { name, day, month, birthYear } = data;
@@ -34,15 +34,27 @@ export default async function add(formData: FormData) {
     }
   }
 
-  await prisma.birthdate.create({
-    data: {
-      id: generateBase64ID(),
-      name: name,
-      day: day,
-      month: month,
-      birthYear: birthYear,
-    },
-  });
+  if (birthdateId) {
+    await prisma.birthdate.update({
+      where: { id: birthdateId },
+      data: {
+        name: name,
+        day: day,
+        month: month,
+        birthYear: birthYear,
+      },
+    });
+  } else {
+    await prisma.birthdate.create({
+      data: {
+        id: generateBase64ID(),
+        name: name,
+        day: day,
+        month: month,
+        birthYear: birthYear,
+      },
+    });
+  }
 
   redirect('/');
 }
