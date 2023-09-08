@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styles from '@/src/app/page.module.css';
 import { daysUntilBirthday, getNewAge } from '@/src/app/birthdays-overview-functions';
 import { Birthdate } from '@prisma/client';
+import Link from 'next/link';
 
 type Props = {
   birthdates: Birthdate[];
@@ -20,11 +21,13 @@ export default function BirthdaysOverview(props: Props) {
     <>
       <div className={styles.searchContainer}>
         <input className={styles.search} onChange={(e) => setSearch(e.target.value)} type='text' placeholder='Search' autoFocus />
-        <button className={styles.addButton}>
-          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
-            <path d='M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z'></path>
-          </svg>
-        </button>
+        <Link href='add' className={styles.addButton}>
+          <button className={styles.addButton}>
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+              <path d='M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z'></path>
+            </svg>
+          </button>
+        </Link>
       </div>
 
       {birthdays.map((birthday) => {

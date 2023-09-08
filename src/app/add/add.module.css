@@ -1,0 +1,9 @@
+.dayAndMonthContainer {
+  display: flex;
+  flex-shrink: 1;
+  gap: 1em;
+}
+
+.dayAndMonthInput {
+  width: 100%;
+}
