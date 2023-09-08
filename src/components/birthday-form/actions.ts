@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { prisma } from '@/src/db';
 import generateBase64ID from '@/src/generate-base-64-id';
 import moment from 'moment';
+import { revalidatePath } from 'next/cache';
 
 export async function addOrEditBirthday(formData: FormData, birthdateId?: string) {
   const birthdaySchema = z.object({
@@ -45,6 +46,7 @@ export async function addOrEditBirthday(formData: FormData, birthdateId?: string
     });
   }
 
+  revalidatePath('/');
   redirect('/');
 }
 
@@ -53,5 +55,6 @@ export async function deleteBirthday(birthdateId: string) {
     where: { id: birthdateId },
   });
 
+  revalidatePath('/');
   redirect('/');
 }
