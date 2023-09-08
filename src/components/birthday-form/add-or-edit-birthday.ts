@@ -37,22 +37,11 @@ export default async function addOrEditBirthday(formData: FormData, birthdateId?
   if (birthdateId) {
     await prisma.birthdate.update({
       where: { id: birthdateId },
-      data: {
-        name: name,
-        day: day,
-        month: month,
-        birthYear: birthYear,
-      },
+      data: { name: name, day: day, month: month, birthYear: birthYear },
     });
   } else {
     await prisma.birthdate.create({
-      data: {
-        id: generateBase64ID(),
-        name: name,
-        day: day,
-        month: month,
-        birthYear: birthYear,
-      },
+      data: { id: generateBase64ID(), name: name, day: day, month: month, birthYear: birthYear },
     });
   }
 
