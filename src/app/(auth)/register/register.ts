@@ -5,6 +5,7 @@ import generateBase64ID from '@/src/generate-base-64-id';
 import { redirect } from 'next/navigation';
 import bcrypt from 'bcrypt';
 import getMongoCollection from '@/src/db';
+import { setLoginCookie } from '@/src/app/(auth)/set-login-cookie';
 
 const schema = z
   .object({
@@ -42,6 +43,8 @@ export default async function register(formData: FormData) {
     { $set: { key: 'calendarApiToken', value: calendarApiToken } },
     { upsert: true }
   );
+
+  await setLoginCookie();
 
   redirect('/');
 }
