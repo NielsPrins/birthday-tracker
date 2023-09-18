@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import login from '@/src/app/auth/login/login';
+import login from '@/src/app/(auth)/login/login';
 
 export default function Form() {
   const [loading, setLoading] = useState(false);

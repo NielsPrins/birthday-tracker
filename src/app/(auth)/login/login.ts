@@ -14,7 +14,7 @@ export default async function login(formData: FormData) {
 
   const loginPasswordHashSetting = await settingsCollection.findOne<Setting>({ key: 'loginPasswordHash' });
   if (!loginPasswordHashSetting) {
-    redirect('/auth/register');
+    redirect('/register');
   }
 
   const validPassword = await checkPassword(String(loginPasswordHashSetting.value), password);

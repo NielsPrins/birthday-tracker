@@ -1,6 +1,6 @@
 'use client';
 
-import register from '@/src/app/auth/register/register';
+import register from '@/src/app/(auth)/register/register';
 import React, { useState } from 'react';
 
 export default function Form() {

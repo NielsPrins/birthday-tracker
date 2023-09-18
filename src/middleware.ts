@@ -6,7 +6,7 @@ export async function middleware(req: NextRequest) {
   const secret = process.env.JWT_SECRET;
 
   if (!token || !secret) {
-    return NextResponse.redirect(new URL('/auth/login', req.url));
+    return NextResponse.redirect(new URL('/login', req.url));
   }
 
   try {
@@ -14,10 +14,10 @@ export async function middleware(req: NextRequest) {
       issuer: 'birthday-tracker',
     });
   } catch (e) {
-    return NextResponse.redirect(new URL('/auth/login', req.url));
+    return NextResponse.redirect(new URL('/login', req.url));
   }
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|auth|.*\\..*).*)'],
+  matcher: ['/((?!api|_next|login|register|.*\\..*).*)'],
 };
