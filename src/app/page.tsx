@@ -1,6 +1,6 @@
-import BirthdaysOverview from "@/src/app/birthdays-overview";
-import { BirthdateWithId } from "@/src/database/models/birthdate";
-import getMongoCollection from "@/src/db";
+import BirthdaysOverview from '@/src/app/birthdays-overview';
+import { BirthdateWithId } from '@/src/database/models/birthdate';
+import getMongoCollection from '@/src/db';
 
 async function getBirthdays() {
   const today = new Date();
@@ -39,8 +39,8 @@ async function getBirthdays() {
         $match: {
           $or: [
             { month: { $lt: today.getUTCMonth() + 1 } },
-            { month: { $lte: today.getUTCMonth() + 1 }, day: { $lt: today.getUTCDate() } ,
-          ,
+            { month: { $lte: today.getUTCMonth() + 1 }, day: { $lt: today.getUTCDate() } },
+          ],
         },
       },
       {
