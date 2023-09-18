@@ -6,7 +6,7 @@ import { ObjectId } from 'mongodb';
 
 async function getBirthdate(birthdateId: string): Promise<BirthdateWithId | null> {
   const birthdatesCollection = await getMongoCollection('birthdates');
-  const birthdates = await birthdatesCollection
+  const [birthdate] = await birthdatesCollection
     .aggregate<BirthdateWithId>([
       { $match: { _id: new ObjectId(birthdateId) } },
       {
@@ -24,7 +24,7 @@ async function getBirthdate(birthdateId: string): Promise<BirthdateWithId | null
     ])
     .toArray();
 
-  return birthdates[0] ?? null;
+  return birthdate ?? null;
 }
 
 interface EditPageProps {
