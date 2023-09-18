@@ -7,16 +7,8 @@ async function getBirthdays() {
 
   const birthdatesCollection = await getMongoCollection('birthdates');
 
-  const birthdatesThisYear = await birthdatesCollection
+  return await birthdatesCollection
     .aggregate<BirthdateWithId>([
-      {
-        $match: {
-          $or: [
-            { month: { $gt: today.getUTCMonth() + 1 } },
-            { month: { $gte: today.getUTCMonth() + 1 }, day: { $gte: today.getUTCDate() } },
-          ],
-        },
-      },
       {
         $project: {
           _id: 0,
@@ -27,39 +19,17 @@ async function getBirthdays() {
           day: 1,
           month: 1,
           birthYear: 1,
-        },
-      },
-    ])
-    .sort({ month: 1, day: 1 })
-    .toArray();
-
-  const birthdatesNextYear = await birthdatesCollection
-    .aggregate<BirthdateWithId>([
-      {
-        $match: {
-          $or: [
-            { month: { $lt: today.getUTCMonth() + 1 } },
-            { month: { $lte: today.getUTCMonth() + 1 }, day: { $lt: today.getUTCDate() } },
-          ],
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          id: {
-            $toString: '$_id',
+          thisYear: {
+            $or: [
+              { $gt: ['$month', today.getUTCMonth() + 1] },
+              { $and: [{ $eq: ['$month', today.getUTCMonth() + 1] }, { $gte: ['$day', today.getUTCDate()] }] },
+            ],
           },
-          name: 1,
-          day: 1,
-          month: 1,
-          birthYear: 1,
         },
       },
     ])
-    .sort({ month: 1, day: 1 })
+    .sort({ thisYear: -1, month: 1, day: 1 })
     .toArray();
-
-  return [...birthdatesThisYear, ...birthdatesNextYear];
 }
 
 export default async function Home() {
