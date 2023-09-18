@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import styles from '@/src/app/page.module.css';
 import { daysUntilBirthday, getNewAge } from '@/src/app/birthdays-overview-functions';
-import { Birthdate } from '@prisma/client';
 import Link from 'next/link';
+import { BirthdateWithId } from '@/src/database/models/birthdate';
 
 type Props = {
-  birthdates: Birthdate[];
+  birthdates: BirthdateWithId[];
 };
 
 export default function BirthdaysOverview(props: Props) {

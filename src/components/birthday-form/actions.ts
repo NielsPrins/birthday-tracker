@@ -2,10 +2,10 @@
 
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
-import { prisma } from '@/src/db';
-import generateBase64ID from '@/src/generate-base-64-id';
 import moment from 'moment';
 import { revalidatePath } from 'next/cache';
+import getMongoCollection from '@/src/db';
+import { ObjectId } from 'mongodb';
 
 export async function addOrEditBirthday(formData: FormData, birthdateId?: string) {
   const birthdaySchema = z.object({
@@ -35,25 +35,20 @@ export async function addOrEditBirthday(formData: FormData, birthdateId?: string
     }
   }
 
-  if (birthdateId) {
-    await prisma.birthdate.update({
-      where: { id: birthdateId },
-      data: { name: name, day: day, month: month, birthYear: birthYear },
-    });
-  } else {
-    await prisma.birthdate.create({
-      data: { id: generateBase64ID(), name: name, day: day, month: month, birthYear: birthYear },
-    });
-  }
+  const birthdatesCollection = await getMongoCollection('birthdates');
+  await birthdatesCollection.findOneAndUpdate(
+    { _id: new ObjectId(birthdateId) },
+    { $set: { name: name, day: day, month: month, birthYear: birthYear } },
+    { upsert: true }
+  );
 
   revalidatePath('/');
   redirect('/');
 }
 
 export async function deleteBirthday(birthdateId: string) {
-  await prisma.birthdate.delete({
-    where: { id: birthdateId },
-  });
+  const birthdatesCollection = await getMongoCollection('birthdates');
+  await birthdatesCollection.deleteOne({ _id: new ObjectId(birthdateId) });
 
   revalidatePath('/');
   redirect('/');

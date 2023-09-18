@@ -1,13 +1,29 @@
-import { PrismaClient } from '@prisma/client';
+import { Collection, MongoClient } from 'mongodb';
 
-const globalForPrisma = global as unknown as {
-  prisma: PrismaClient | undefined;
+const globalForMongo = global as unknown as {
+  _mongoClientPromise: Promise<MongoClient>;
 };
 
-export const prisma =
-  globalForPrisma.prisma ??
-  new PrismaClient({
-    log: ['query'],
-  });
+const uri = process.env.MONGODB_URI;
+if (!uri) {
+  throw new Error('no MONGODB_URI configured');
+}
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+let client;
+let clientPromise: Promise<MongoClient>;
+if (process.env.NODE_ENV === 'development') {
+  if (!globalForMongo._mongoClientPromise) {
+    client = new MongoClient(uri);
+    globalForMongo._mongoClientPromise = client.connect();
+  }
+  clientPromise = globalForMongo._mongoClientPromise;
+} else {
+  client = new MongoClient(uri);
+  clientPromise = client.connect();
+}
+
+export default async function getMongoCollection(collection: string): Promise<Collection<Document>> {
+  const client = await clientPromise;
+  const db = client.db('db');
+  return db.collection(collection);
+}

@@ -1,20 +1,23 @@
 'use server';
 
 import { redirect } from 'next/navigation';
-import { prisma } from '@/src/db';
 import { cookies } from 'next/headers';
 import { SignJWT } from 'jose';
 import bcrypt from 'bcrypt';
+import getMongoCollection from '@/src/db';
+import Setting from '@/src/database/models/setting';
 
 export default async function login(formData: FormData) {
+  const settingsCollection = await getMongoCollection('settings');
+
   const password = String(formData.get('password'));
 
-  const authRecord = await prisma.auth.findFirst();
-  if (!authRecord) {
+  const loginPasswordHashSetting = await settingsCollection.findOne<Setting>({ key: 'loginPasswordHash' });
+  if (!loginPasswordHashSetting) {
     redirect('/auth/register');
   }
 
-  const validPassword = await checkPassword(authRecord.passwordHash, password);
+  const validPassword = await checkPassword(String(loginPasswordHashSetting.value), password);
   if (!validPassword) {
     throw new Error('Invalid password');
   }

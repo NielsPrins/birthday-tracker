@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import styles from './birthday-form.module.css';
-import { Birthdate } from '@prisma/client';
 import { addOrEditBirthday, deleteBirthday } from '@/src/components/birthday-form/actions';
+import { BirthdateWithId } from '@/src/database/models/birthdate';
 
 interface FormProps {
-  birthdate?: Birthdate;
+  birthdate?: BirthdateWithId;
 }
 
 export default function BirthdayForm(props: FormProps) {

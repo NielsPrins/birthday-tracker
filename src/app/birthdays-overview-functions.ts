@@ -1,5 +1,4 @@
-import { prisma } from '@/src/db';
-import type { Birthdate } from '@prisma/client';
+import Birthdate from '@/src/database/models/birthdate';
 
 export function getNewAge(birthdate: Birthdate): number | null {
   if (!birthdate.birthYear) return null;
@@ -33,23 +32,4 @@ export function daysUntilBirthday(birthdate: Birthdate): number {
 
   const timeDifference = nextBirthday.getTime() - today.getTime();
   return Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-}
-
-export async function getBirthdays() {
-  const today = new Date();
-
-  return [
-    ...(await prisma.birthdate.findMany({
-      where: {
-        OR: [{ month: { gt: today.getUTCMonth() + 1 } }, { month: { gte: today.getUTCMonth() + 1 }, day: { gte: today.getUTCDay() } }],
-      },
-      orderBy: [{ month: 'asc' }, { day: 'asc' }],
-    })),
-    ...(await prisma.birthdate.findMany({
-      where: {
-        OR: [{ month: { lt: today.getUTCMonth() + 1 } }, { month: { lte: today.getUTCMonth() + 1 }, day: { lt: today.getUTCDay() } }],
-      },
-      orderBy: [{ month: 'asc' }, { day: 'asc' }],
-    })),
-  ];
 }

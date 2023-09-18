@@ -3,8 +3,8 @@
 import { z } from 'zod';
 import generateBase64ID from '@/src/generate-base-64-id';
 import { redirect } from 'next/navigation';
-import { prisma } from '@/src/db';
 import bcrypt from 'bcrypt';
+import getMongoCollection from '@/src/db';
 
 const schema = z
   .object({
@@ -27,15 +27,21 @@ export default async function register(formData: FormData) {
     confirmPassword: formData.get('confirmPassword'),
   });
 
-  const agendaToken = generateBase64ID(20);
+  const calendarApiToken = generateBase64ID(20);
   const passwordHash = await hashPassword(data.password);
 
-  await prisma.auth.create({
-    data: {
-      agendaToken: agendaToken,
-      passwordHash: passwordHash,
-    },
-  });
+  const settingsCollection = await getMongoCollection('settings');
+
+  await settingsCollection.findOneAndUpdate(
+    { key: 'loginPasswordHash' },
+    { $set: { key: 'loginPasswordHash', value: passwordHash } },
+    { upsert: true }
+  );
+  await settingsCollection.findOneAndUpdate(
+    { key: 'calendarApiToken' },
+    { $set: { key: 'calendarApiToken', value: calendarApiToken } },
+    { upsert: true }
+  );
 
   redirect('/');
 }

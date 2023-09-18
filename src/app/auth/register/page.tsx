@@ -1,10 +1,12 @@
-import { prisma } from '@/src/db';
+import getMongoCollection from '@/src/db';
 import { redirect } from 'next/navigation';
 import Form from '@/src/app/auth/register/form';
+import Setting from '@/src/database/models/setting';
 
 export default async function RegisterPage() {
-  const authRecord = await prisma.auth.findFirst();
-  if (authRecord) {
+  const settingsCollection = await getMongoCollection('settings');
+  const loginPasswordHashSetting = await settingsCollection.findOne<Setting>({ key: 'loginPasswordHash' });
+  if (loginPasswordHashSetting) {
     redirect('/auth/login');
   }
 
