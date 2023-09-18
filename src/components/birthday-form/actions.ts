@@ -19,7 +19,7 @@ export async function addOrEditBirthday(formData: FormData, birthdateId?: string
     name: formData.get('name'),
     day: formData.get('day'),
     month: formData.get('month'),
-    birthYear: formData.has('birthYear') ? Number(formData.get('birthYear')) : null,
+    birthYear: formData.get('birthYear') ? Number(formData.get('birthYear')) : null,
   });
 
   const { name, day, month, birthYear } = data;
