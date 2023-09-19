@@ -2,6 +2,8 @@ import BirthdaysOverview from '@/src/app/birthdays-overview';
 import { BirthdateWithId } from '@/src/database/models/birthdate';
 import getMongoCollection from '@/src/db';
 
+export const dynamic = 'force-dynamic';
+
 async function getBirthdays() {
   const today = new Date();
 

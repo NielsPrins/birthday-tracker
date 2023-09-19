@@ -1,5 +1,12 @@
-version: '3.3'
+version: '3.9'
 services:
+  birthday-tracker:
+    build: .
+    container_name: birthday-tracker
+    ports:
+      - '3000:3000'
+    depends_on:
+      - birthday-tracker-mongodb
   mongodb:
     image: mongo
     container_name: birthday-tracker-mongodb

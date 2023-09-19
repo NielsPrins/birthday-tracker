@@ -2,8 +2,9 @@
 
 ## Getting Started
 
-First, run the development server:
+To run the development server:
 
 ```bash
+docker compose up mongodb
 yarn dev
 ```
