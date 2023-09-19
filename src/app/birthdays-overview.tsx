@@ -13,8 +13,12 @@ type Props = {
 export default function BirthdaysOverview(props: Props) {
   const [search, setSearch] = useState('');
 
-  const birthdays = props.birthdates.filter((birthday) => {
-    return birthday.name.toLowerCase().includes(search.toLowerCase());
+  const birthdays = props.birthdates.map((birthday) => {
+    const matchesSearch = birthday.name.toLowerCase().includes(search.toLowerCase());
+    return {
+      ...birthday,
+      hidden: !matchesSearch,
+    };
   });
 
   return (
@@ -36,13 +40,17 @@ export default function BirthdaysOverview(props: Props) {
         const newAge = getNewAge(birthday);
 
         return (
-          <Link key={birthday.id} href={`edit/${birthday.id}`} className={styles.birthday}>
-            <div>
-              <div className={styles.birthdayName}>{birthday.name}</div>
-              {newAge && <div>{newAge} years</div>}
+          <div key={birthday.id} className={`${styles.birthdateContainer} ${birthday.hidden ? styles.hidden : null}`}>
+            <div className={styles.birthdateContainerContent}>
+              <Link href={`edit/${birthday.id}`} className={styles.birthday}>
+                <div>
+                  <div className={styles.birthdayName}>{birthday.name}</div>
+                  {newAge && <div>{newAge} years</div>}
+                </div>
+                <div>{daysUntilBirthday(birthday)} days</div>
+              </Link>
             </div>
-            <div>{daysUntilBirthday(birthday)} days</div>
-          </Link>
+          </div>
         );
       })}
     </>

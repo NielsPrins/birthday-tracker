@@ -11,6 +11,22 @@
   width: 2.25em;
 }
 
+.birthdateContainer {
+  display: grid;
+  grid-template-rows: 1fr;
+  overflow: hidden;
+  transition: grid-template-rows 250ms;
+}
+
+.birthdateContainer.hidden {
+  grid-template-rows: 0fr;
+}
+
+.birthdateContainerContent {
+  min-height: 0;
+}
+
+
 .birthday {
   display: grid;
   grid-template-columns: 1fr auto;
