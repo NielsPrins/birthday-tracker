@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import styles from '@/src/app/page.module.css';
+import styles from '@/src/app/birthday-overview.module.css';
 import { daysUntilBirthday, getNewAge } from '@/src/app/birthdays-overview-functions';
 import Link from 'next/link';
 import { BirthdateWithId } from '@/src/database/models/birthdate';
@@ -29,6 +29,8 @@ export default function BirthdaysOverview(props: Props) {
           </button>
         </Link>
       </div>
+
+      {birthdays.length === 0 && <div className={styles.noBirthdays}>No birthdays yet? Start by creating one using the add button!</div>}
 
       {birthdays.map((birthday) => {
         const newAge = getNewAge(birthday);
