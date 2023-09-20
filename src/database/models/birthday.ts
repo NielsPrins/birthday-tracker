@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 
-export default interface Birthdate {
+export default interface Birthday {
   _id?: ObjectId;
   name: string;
   day: number;
@@ -8,6 +8,6 @@ export default interface Birthdate {
   birthYear?: number;
 }
 
-export interface BirthdateWithId extends Omit<Birthdate, '_id'> {
+export interface BirthdayWithId extends Omit<Birthday, '_id'> {
   id: string;
 }

@@ -1,14 +1,14 @@
 import BirthdayForm from '@/src/components/birthday-form/birthday-form';
 import { notFound } from 'next/navigation';
 import getMongoCollection from '@/src/db';
-import { BirthdateWithId } from '@/src/database/models/birthdate';
+import { BirthdayWithId } from '@/src/database/models/birthday';
 import { ObjectId } from 'mongodb';
 
-async function getBirthdate(birthdateId: string): Promise<BirthdateWithId | null> {
-  const birthdatesCollection = await getMongoCollection('birthdates');
-  const [birthdate] = await birthdatesCollection
-    .aggregate<BirthdateWithId>([
-      { $match: { _id: new ObjectId(birthdateId) } },
+async function getBirthday(birthdayId: string): Promise<BirthdayWithId | null> {
+  const birthdaysCollection = await getMongoCollection('birthdays');
+  const [birthday] = await birthdaysCollection
+    .aggregate<BirthdayWithId>([
+      { $match: { _id: new ObjectId(birthdayId) } },
       {
         $project: {
           _id: 0,
@@ -24,16 +24,16 @@ async function getBirthdate(birthdateId: string): Promise<BirthdateWithId | null
     ])
     .toArray();
 
-  return birthdate ?? null;
+  return birthday ?? null;
 }
 
 interface EditPageProps {
-  params: { birthdateId: string };
+  params: { birthdayId: string };
 }
 
 export default async function EditPage({ params }: EditPageProps) {
-  const birthdate = await getBirthdate(params.birthdateId);
-  if (!birthdate) {
+  const birthday = await getBirthday(params.birthdayId);
+  if (!birthday) {
     notFound();
   }
 
@@ -41,7 +41,7 @@ export default async function EditPage({ params }: EditPageProps) {
     <main>
       <h1>Edit birthday</h1>
 
-      <BirthdayForm birthdate={birthdate}></BirthdayForm>
+      <BirthdayForm birthday={birthday}></BirthdayForm>
     </main>
   );
 }

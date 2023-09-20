@@ -7,7 +7,7 @@ import { revalidatePath } from 'next/cache';
 import getMongoCollection from '@/src/db';
 import { ObjectId } from 'mongodb';
 
-export async function addOrEditBirthday(formData: FormData, birthdateId?: string) {
+export async function addOrEditBirthday(formData: FormData, birthdayId?: string) {
   const birthdaySchema = z.object({
     name: z.string().min(1),
     day: z.string().transform(Number),
@@ -35,9 +35,9 @@ export async function addOrEditBirthday(formData: FormData, birthdateId?: string
     }
   }
 
-  const birthdatesCollection = await getMongoCollection('birthdates');
-  await birthdatesCollection.findOneAndUpdate(
-    { _id: new ObjectId(birthdateId) },
+  const birthdaysCollection = await getMongoCollection('birthdays');
+  await birthdaysCollection.findOneAndUpdate(
+    { _id: new ObjectId(birthdayId) },
     { $set: { name: name, day: day, month: month, birthYear: birthYear } },
     { upsert: true }
   );
@@ -46,9 +46,9 @@ export async function addOrEditBirthday(formData: FormData, birthdateId?: string
   redirect('/');
 }
 
-export async function deleteBirthday(birthdateId: string) {
-  const birthdatesCollection = await getMongoCollection('birthdates');
-  await birthdatesCollection.deleteOne({ _id: new ObjectId(birthdateId) });
+export async function deleteBirthday(birthdayId: string) {
+  const birthdaysCollection = await getMongoCollection('birthdays');
+  await birthdaysCollection.deleteOne({ _id: new ObjectId(birthdayId) });
 
   revalidatePath('/');
   redirect('/');

@@ -3,10 +3,10 @@
 import React, { useState } from 'react';
 import styles from './birthday-form.module.css';
 import { addOrEditBirthday, deleteBirthday } from '@/src/components/birthday-form/actions';
-import { BirthdateWithId } from '@/src/database/models/birthdate';
+import { BirthdayWithId } from '@/src/database/models/birthday';
 
 interface FormProps {
-  birthdate?: BirthdateWithId;
+  birthday?: BirthdayWithId;
 }
 
 export default function BirthdayForm(props: FormProps) {
@@ -23,26 +23,26 @@ export default function BirthdayForm(props: FormProps) {
     const formData = new FormData(e.target as HTMLFormElement);
 
     try {
-      await addOrEditBirthday(formData, props.birthdate?.id);
+      await addOrEditBirthday(formData, props.birthday?.id);
     } catch (e) {
       setLoading(false);
       setError(true);
     }
   }
 
-  async function deleteBirthdate(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  async function deleteBirthdayClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
 
     if (loading) return;
 
-    const birthdateId = props.birthdate?.id;
-    if (!birthdateId) return;
+    const birthdayId = props.birthday?.id;
+    if (!birthdayId) return;
 
     setLoading(true);
     setError(false);
 
     try {
-      await deleteBirthday(birthdateId);
+      await deleteBirthday(birthdayId);
     } catch (e) {
       setLoading(false);
       setError(true);
@@ -53,7 +53,7 @@ export default function BirthdayForm(props: FormProps) {
     <form onSubmit={onSubmit}>
       {error && <div>Something went wrong.</div>}
 
-      <input type='text' placeholder='Name' name='name' autoFocus defaultValue={props.birthdate?.name} />
+      <input type='text' placeholder='Name' name='name' autoFocus defaultValue={props.birthday?.name} />
       <div className={styles.dayAndMonthContainer}>
         <input
           className={styles.dayAndMonthInput}
@@ -61,7 +61,7 @@ export default function BirthdayForm(props: FormProps) {
           pattern='[0-9]*'
           placeholder='Day'
           name='day'
-          defaultValue={props.birthdate?.day}
+          defaultValue={props.birthday?.day}
         />
         <input
           className={styles.dayAndMonthInput}
@@ -69,7 +69,7 @@ export default function BirthdayForm(props: FormProps) {
           pattern='[0-9]*'
           placeholder='Month'
           name='month'
-          defaultValue={props.birthdate?.month}
+          defaultValue={props.birthday?.month}
         />
       </div>
       <input
@@ -77,15 +77,15 @@ export default function BirthdayForm(props: FormProps) {
         pattern='[0-9]*'
         placeholder='Birth year'
         name='birthYear'
-        defaultValue={props.birthdate?.birthYear ?? undefined}
+        defaultValue={props.birthday?.birthYear ?? undefined}
       />
 
       <button type='submit' className='fill'>
-        {props.birthdate ? 'Save' : 'Add'}
+        {props.birthday ? 'Save' : 'Add'}
       </button>
 
-      {props.birthdate && (
-        <button onClick={deleteBirthdate} className={styles.deleteButton}>
+      {props.birthday && (
+        <button onClick={deleteBirthdayClick} className={styles.deleteButton}>
           Delete
         </button>
       )}

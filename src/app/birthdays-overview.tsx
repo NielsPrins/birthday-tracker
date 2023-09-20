@@ -4,16 +4,16 @@ import { useState } from 'react';
 import styles from '@/src/app/birthday-overview.module.css';
 import { daysUntilBirthday, getNewAge } from '@/src/app/birthdays-overview-functions';
 import Link from 'next/link';
-import { BirthdateWithId } from '@/src/database/models/birthdate';
+import { BirthdayWithId } from '@/src/database/models/birthday';
 
 type Props = {
-  birthdates: BirthdateWithId[];
+  birthdays: BirthdayWithId[];
 };
 
 export default function BirthdaysOverview(props: Props) {
   const [search, setSearch] = useState('');
 
-  const birthdays = props.birthdates.map((birthday) => {
+  const birthdays = props.birthdays.map((birthday) => {
     const matchesSearch = birthday.name.toLowerCase().includes(search.toLowerCase());
     return {
       ...birthday,
@@ -40,8 +40,8 @@ export default function BirthdaysOverview(props: Props) {
         const newAge = getNewAge(birthday);
 
         return (
-          <div key={birthday.id} className={`${styles.birthdateContainer} ${birthday.hidden ? styles.hidden : null}`}>
-            <div className={styles.birthdateContainerContent}>
+          <div key={birthday.id} className={`${styles.birthdayContainer} ${birthday.hidden ? styles.hidden : null}`}>
+            <div className={styles.birthdayContainerContent}>
               <Link href={`edit/${birthday.id}`} className={styles.birthday}>
                 <div>
                   <div className={styles.birthdayName}>{birthday.name}</div>

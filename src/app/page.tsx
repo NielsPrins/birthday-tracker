@@ -1,5 +1,5 @@
 import BirthdaysOverview from '@/src/app/birthdays-overview';
-import { BirthdateWithId } from '@/src/database/models/birthdate';
+import { BirthdayWithId } from '@/src/database/models/birthday';
 import getMongoCollection from '@/src/db';
 
 export const dynamic = 'force-dynamic';
@@ -7,10 +7,10 @@ export const dynamic = 'force-dynamic';
 async function getBirthdays() {
   const today = new Date();
 
-  const birthdatesCollection = await getMongoCollection('birthdates');
+  const birthdaysCollection = await getMongoCollection('birthdays');
 
-  return await birthdatesCollection
-    .aggregate<BirthdateWithId>([
+  return await birthdaysCollection
+    .aggregate<BirthdayWithId>([
       {
         $project: {
           _id: 0,
@@ -41,7 +41,7 @@ export default async function Home() {
     <main>
       <h1>Birthdays</h1>
 
-      <BirthdaysOverview birthdates={birthdays}></BirthdaysOverview>
+      <BirthdaysOverview birthdays={birthdays}></BirthdaysOverview>
     </main>
   );
 }
