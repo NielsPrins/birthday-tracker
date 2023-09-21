@@ -38,6 +38,5 @@ EXPOSE 3000
 
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
-ENV MONGODB_URI "mongodb://birthday-tracker-mongodb/db"
 
 CMD ["node", "server.js"]
