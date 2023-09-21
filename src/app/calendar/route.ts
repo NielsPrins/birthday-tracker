@@ -1,6 +1,5 @@
 import { createEvents, EventAttributes } from 'ics';
-import { NextApiRequest } from 'next';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import getMongoCollection from '@/src/db';
 import Setting from '@/src/database/models/setting';
 import { getBirthdays } from '@/src/app/get-birthdays';
@@ -12,7 +11,7 @@ const defaultEvent = {
   calName: 'Birthdays',
 };
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: NextRequest) {
   const url = new URL(req.url ?? '');
   const calendarToken = url.searchParams.get('token');
 
