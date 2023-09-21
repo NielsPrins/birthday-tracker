@@ -15,6 +15,7 @@
     "bcrypt": "^5.1.1",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
+    "ics": "^3.5.0",
     "jose": "^4.14.6",
     "moment": "^2.29.4",
     "mongodb": "^6.1.0",
