@@ -22,9 +22,12 @@ export function getNewAge(birthday: Birthday): number | null {
   return newAge;
 }
 
-export function daysUntilBirthday(birthday: Birthday): number {
+export function getDaysUntilBirthday(birthday: Birthday): number {
   const today = new Date();
-  const nextBirthday = new Date(today.getUTCFullYear(), birthday.month - 1, birthday.day);
+  today.setUTCHours(0);
+  today.setUTCMinutes(0);
+  today.setUTCSeconds(0, 0);
+  const nextBirthday = new Date(Date.UTC(today.getUTCFullYear(), birthday.month - 1, birthday.day));
 
   if (nextBirthday < today) {
     nextBirthday.setUTCFullYear(nextBirthday.getUTCFullYear() + 1);

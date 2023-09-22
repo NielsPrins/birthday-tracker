@@ -4,7 +4,7 @@ import { useState } from 'react';
 import styles from '@/src/app/birthday-overview.module.css';
 import Link from 'next/link';
 import { BirthdayWithId } from '@/src/database/models/birthday';
-import { daysUntilBirthday, getNewAge } from '@/src/app/birthdays-overview-functions';
+import { getDaysUntilBirthday, getNewAge } from '@/src/app/birthdays-overview-functions';
 
 type Props = {
   birthdays: BirthdayWithId[];
@@ -49,6 +49,7 @@ export default function BirthdaysOverview(props: Props) {
 
       {birthdays.map((birthday) => {
         const newAge = getNewAge(birthday);
+        const daysUntilBirthday = getDaysUntilBirthday(birthday);
 
         return (
           <div key={birthday.id} className={`${styles.birthdayContainer} ${birthday.hidden ? styles.hidden : null}`}>
@@ -58,7 +59,7 @@ export default function BirthdaysOverview(props: Props) {
                   <div className={styles.birthdayName}>{birthday.name}</div>
                   {newAge && <div>{newAge} years</div>}
                 </div>
-                <div>{daysUntilBirthday(birthday)} days</div>
+                <div>{daysUntilBirthday == 0 ? 'Today' : `${daysUntilBirthday} days`}</div>
               </Link>
             </div>
           </div>
