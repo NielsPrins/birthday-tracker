@@ -8,8 +8,6 @@ export default async function Home() {
 
   return (
     <main>
-      <h1>Birthdays</h1>
-
       <BirthdaysOverview birthdays={birthdays}></BirthdaysOverview>
     </main>
   );

@@ -53,6 +53,10 @@ a {
   text-decoration: inherit;
 }
 
+svg {
+  fill: currentColor;
+}
+
 form {
   display: grid;
   gap: 1em;
