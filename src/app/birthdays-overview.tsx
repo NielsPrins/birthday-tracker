@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from "react";
-import styles from "@/src/app/birthday-overview.module.css";
-import Link from "next/link";
-import { BirthdayWithId } from "@/src/database/models/birthday";
+import { useState } from 'react';
+import styles from '@/src/app/birthday-overview.module.css';
+import Link from 'next/link';
+import { BirthdayWithId } from '@/src/database/models/birthday';
+import { daysUntilBirthday, getNewAge } from '@/src/app/birthdays-overview-functions';
 
 type Props = {
   birthdays: BirthdayWithId[];
@@ -36,7 +37,7 @@ export default function BirthdaysOverview(props: Props) {
       <div className={styles.searchContainer}>
         <input className={styles.search} onChange={(e) => setSearch(e.target.value)} type='text' placeholder='Search' autoFocus />
         <Link href='add'>
-         "<bu"ton className={styles.addButton}>
+          <button className={styles.addButton}>
             <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
               <path d='M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z'></path>
             </svg>
