@@ -14,7 +14,7 @@ export function getNewAge(birthday: Birthday): number | null {
 
   if (
     today.getUTCMonth() < birthdayDate.getUTCMonth() ||
-    (today.getUTCMonth() === birthdayDate.getUTCMonth() && today.getUTCDate() < birthdayDate.getUTCDate())
+    (today.getUTCMonth() === birthdayDate.getUTCMonth() && today.getUTCDate() <= birthdayDate.getUTCDate())
   ) {
     return newAge - 1;
   }
