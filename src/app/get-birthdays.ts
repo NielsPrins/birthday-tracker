@@ -1,3 +1,5 @@
+'use server';
+
 import getMongoCollection from '@/src/db';
 import { BirthdayWithId } from '@/src/database/models/birthday';
 
