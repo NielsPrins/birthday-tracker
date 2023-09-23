@@ -4,10 +4,7 @@ const globalForMongo = global as unknown as {
   _mongoClientPromise: Promise<MongoClient>;
 };
 
-const uri = process.env.MONGODB_URI;
-if (!uri) {
-  throw new Error('no MONGODB_URI configured');
-}
+const uri = process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/db';
 
 let client;
 let clientPromise: Promise<MongoClient>;
