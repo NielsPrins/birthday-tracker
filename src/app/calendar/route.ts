@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
       start: [nextBirthday.getUTCFullYear(), nextBirthday.getUTCMonth(), nextBirthday.getUTCDate()],
       end: [nextBirthday.getUTCFullYear(), nextBirthday.getUTCMonth(), nextBirthday.getUTCDate() + 1],
       title: `${birthday.name}${newAge ? ` (${newAge})` : ''}`,
-      description: `Last sync on: ${moment(now).format('DD MMMM YYYY HH:mm')}`,
+      description: `Last synced: ${moment(now).fromNow()}`,
     };
   });
 
