@@ -1,6 +1,6 @@
 import { createEvents, EventAttributes } from 'ics';
 import { NextRequest, NextResponse } from 'next/server';
-import getMongoCollection from '@/src/db';
+import getMongoCollection from '@/src/database/db';
 import Setting from '@/src/database/models/setting';
 import { getBirthdays } from '@/src/app/get-birthdays';
 import { getNewAge } from '@/src/app/birthdays-overview-functions';

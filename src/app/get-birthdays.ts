@@ -1,6 +1,6 @@
 'use server';
 
-import getMongoCollection from '@/src/db';
+import getMongoCollection from '@/src/database/db';
 import { BirthdayWithId } from '@/src/database/models/birthday';
 
 export async function getBirthdays(): Promise<BirthdayWithId[]> {

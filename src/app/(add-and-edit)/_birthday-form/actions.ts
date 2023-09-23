@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import moment from 'moment';
 import { revalidatePath } from 'next/cache';
-import getMongoCollection from '@/src/db';
+import getMongoCollection from '@/src/database/db';
 import { ObjectId } from 'mongodb';
 
 export async function addOrEditBirthday(formData: FormData, birthdayId?: string) {

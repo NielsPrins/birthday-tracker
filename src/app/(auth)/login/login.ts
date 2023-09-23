@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import bcrypt from 'bcrypt';
-import getMongoCollection from '@/src/db';
+import getMongoCollection from '@/src/database/db';
 import Setting from '@/src/database/models/setting';
 import { setLoginCookie } from '@/src/app/(auth)/set-login-cookie';
 

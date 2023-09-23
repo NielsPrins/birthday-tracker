@@ -1,4 +1,4 @@
-import getMongoCollection from '@/src/db';
+import getMongoCollection from '@/src/database/db';
 import { redirect } from 'next/navigation';
 import Setting from '@/src/database/models/setting';
 import Form from '@/src/app/(auth)/login/form';

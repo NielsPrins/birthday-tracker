@@ -1,4 +1,4 @@
-import BirthdayForm from '@/src/components/birthday-form/birthday-form';
+import BirthdayForm from '@/src/app/(add-and-edit)/_birthday-form/birthday-form';
 
 export default async function AddPage() {
   return (

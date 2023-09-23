@@ -4,7 +4,7 @@ import { z } from 'zod';
 import generateBase64ID from '@/src/generate-base-64-id';
 import { redirect } from 'next/navigation';
 import bcrypt from 'bcrypt';
-import getMongoCollection from '@/src/db';
+import getMongoCollection from '@/src/database/db';
 import { setLoginCookie } from '@/src/app/(auth)/set-login-cookie';
 
 const schema = z

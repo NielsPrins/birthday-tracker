@@ -1,4 +1,4 @@
-import getMongoCollection from '@/src/db';
+import getMongoCollection from '@/src/database/db';
 import Setting from '@/src/database/models/setting';
 import Settings from '@/src/app/settings/settings';
 import { headers } from 'next/headers';

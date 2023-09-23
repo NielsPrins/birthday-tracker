@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import styles from './birthday-form.module.css';
-import { addOrEditBirthday, deleteBirthday } from '@/src/components/birthday-form/actions';
+import { addOrEditBirthday, deleteBirthday } from '@/src/app/(add-and-edit)/_birthday-form/actions';
 import { BirthdayWithId } from '@/src/database/models/birthday';
 
 interface FormProps {

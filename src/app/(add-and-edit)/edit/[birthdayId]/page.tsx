@@ -1,6 +1,6 @@
-import BirthdayForm from '@/src/components/birthday-form/birthday-form';
+import BirthdayForm from '@/src/app/(add-and-edit)/_birthday-form/birthday-form';
 import { notFound } from 'next/navigation';
-import getMongoCollection from '@/src/db';
+import getMongoCollection from '@/src/database/db';
 import { BirthdayWithId } from '@/src/database/models/birthday';
 import { ObjectId } from 'mongodb';
 
