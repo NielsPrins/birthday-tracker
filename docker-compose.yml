@@ -8,7 +8,7 @@ services:
     depends_on:
       - mongodb
     environment:
-      - MONGODB_URI="mongodb://birthday-tracker-mongodb:27017/db"
+      - MONGODB_URI=mongodb://birthday-tracker-mongodb:27017/db
   mongodb:
     image: mongo
     container_name: birthday-tracker-mongodb
