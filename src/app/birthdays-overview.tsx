@@ -59,7 +59,7 @@ export default function BirthdaysOverview(props: Props) {
                   <div className={styles.birthdayName}>{birthday.name}</div>
                   {newAge && <div>{newAge} years</div>}
                 </div>
-                <div>{daysUntilBirthday == 0 ? 'Today' : `${daysUntilBirthday} days`}</div>
+                <div>{daysUntilBirthday === 0 ? 'Today' : `${daysUntilBirthday} days`}</div>
               </Link>
             </div>
           </div>
