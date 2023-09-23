@@ -86,6 +86,7 @@ export default function BirthdayForm(props: FormProps) {
           pattern='[0-9]*'
           placeholder='Day'
           name='day'
+          autoCapitalize='words'
           defaultValue={props.birthday?.day}
           onKeyUp={(e) => inputKeyup(e, 'day')}
         />

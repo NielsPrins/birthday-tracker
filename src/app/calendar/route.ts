@@ -25,11 +25,22 @@ export async function GET(req: NextRequest) {
   const birthdays = await getBirthdays();
   const birthdayEvents = birthdays.map((birthday): EventAttributes => {
     const newAge = getNewAge(birthday);
+
+    const today = new Date();
+    today.setUTCHours(0);
+    today.setUTCMinutes(0);
+    today.setUTCSeconds(0, 0);
+    const nextBirthday = new Date(Date.UTC(today.getUTCFullYear(), birthday.month - 1, birthday.day));
+
+    if (nextBirthday < today) {
+      nextBirthday.setUTCFullYear(nextBirthday.getUTCFullYear() + 1);
+    }
+
     return {
       ...defaultEvent,
       uid: birthday.id,
-      start: [now.getUTCFullYear(), birthday.month, birthday.day],
-      end: [now.getUTCFullYear(), birthday.month, birthday.day + 1],
+      start: [nextBirthday.getUTCFullYear(), nextBirthday.getUTCMonth(), nextBirthday.getUTCDay()],
+      end: [nextBirthday.getUTCFullYear(), nextBirthday.getUTCMonth(), nextBirthday.getUTCDay() + 1],
       title: `${birthday.name}${newAge ? ` (${newAge})` : ''}`,
       description: `Last sync on: ${moment(now).format('DD MMMM YYYY HH:mm')}`,
     };
