@@ -39,8 +39,8 @@ export async function GET(req: NextRequest) {
     return {
       ...defaultEvent,
       uid: birthday.id,
-      start: [nextBirthday.getUTCFullYear(), nextBirthday.getUTCMonth(), nextBirthday.getUTCDay()],
-      end: [nextBirthday.getUTCFullYear(), nextBirthday.getUTCMonth(), nextBirthday.getUTCDay() + 1],
+      start: [nextBirthday.getUTCFullYear(), nextBirthday.getUTCMonth(), nextBirthday.getUTCDate()],
+      end: [nextBirthday.getUTCFullYear(), nextBirthday.getUTCMonth(), nextBirthday.getUTCDate() + 1],
       title: `${birthday.name}${newAge ? ` (${newAge})` : ''}`,
       description: `Last sync on: ${moment(now).format('DD MMMM YYYY HH:mm')}`,
     };
