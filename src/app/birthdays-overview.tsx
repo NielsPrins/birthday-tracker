@@ -43,24 +43,26 @@ export default function BirthdaysOverview(props: Props) {
 
       {birthdays.length === 0 && <div className={styles.noBirthdays}>No birthdays yet? Start by creating one using the add button!</div>}
 
-      {birthdays.map((birthday) => {
-        const newAge = getNewAge(birthday);
-        const daysUntilBirthday = getDaysUntilBirthday(birthday);
+      <div>
+        {birthdays.map((birthday) => {
+          const newAge = getNewAge(birthday);
+          const daysUntilBirthday = getDaysUntilBirthday(birthday);
 
-        return (
-          <div key={birthday.id} className={`${styles.birthdayContainer} ${birthday.hidden ? styles.hidden : null}`}>
-            <div className={styles.birthdayContainerContent}>
-              <Link href={`edit/${birthday.id}`} className={styles.birthday}>
-                <div>
-                  <div className={styles.birthdayName}>{birthday.name}</div>
-                  {newAge && <div>{newAge} years</div>}
-                </div>
-                <div>{daysUntilBirthday === 0 ? 'Today' : `${daysUntilBirthday} days`}</div>
-              </Link>
+          return (
+            <div key={birthday.id} className={`${styles.birthdayContainer} ${birthday.hidden ? styles.hidden : ''}`}>
+              <div className={styles.birthdayContainerContent}>
+                <Link href={`edit/${birthday.id}`} className={styles.birthday}>
+                  <div>
+                    <div className={styles.birthdayName}>{birthday.name}</div>
+                    {newAge && <div>{newAge} years</div>}
+                  </div>
+                  <div>{daysUntilBirthday === 0 ? 'Today' : `${daysUntilBirthday} days`}</div>
+                </Link>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </>
   );
 }
