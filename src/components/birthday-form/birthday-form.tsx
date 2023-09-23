@@ -54,7 +54,7 @@ export default function BirthdayForm(props: FormProps) {
   }
 
   function inputKeyup(e: React.KeyboardEvent<HTMLInputElement>, input: 'day' | 'month' | 'birthYear') {
-    if (!Number(e.key)) return;
+    if (isNaN(Number(e.key))) return;
     const eventTarget = e.target as HTMLInputElement;
     const value = Number(eventTarget.value);
     const valueLength = eventTarget.value.length;
