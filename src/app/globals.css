@@ -63,7 +63,8 @@ form {
 }
 
 input,
-button {
+button,
+a.button {
   height: 2.25em;
   background-color: #ffffff;
   color: #000000;
@@ -88,16 +89,20 @@ button {
 
 input:focus,
 button:hover,
-button:focus {
+button:focus,
+a.button:hover,
+a.button:focus {
   box-shadow: 0 0 0 3px var(--primary-color);
 }
 
-button.fill {
+button.fill, a.button.fill {
   background-color: var(--primary-color);
   color: #ffffff;
 }
 
 button.fill:hover,
-button.fill:focus {
+button.fill:focus,
+a.button.fill:hover,
+a.button.fill:focus {
   box-shadow: 0 0 0 3px hsla(var(--primary-color-h), var(--primary-color-s), var(--primary-color-l), 0.5);
 }
