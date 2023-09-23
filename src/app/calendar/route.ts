@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import getMongoCollection from '@/src/database/db';
 import Setting from '@/src/database/models/setting';
 import { getBirthdays } from '@/src/app/get-birthdays';
-import { getNewAge } from '@/src/app/_birthday-overview/birthdays-overview-functions';
 import moment from 'moment';
+import getNewAge from '@/src/functions/get-new-age';
 
 const defaultEvent = {
   productId: 'birthday-tracker',

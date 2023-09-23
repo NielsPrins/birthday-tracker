@@ -1,6 +1,6 @@
 import Birthday from '@/src/database/models/birthday';
 
-export function getNewAge(birthday: Birthday): number | null {
+export default function getNewAge(birthday: Birthday): number | null {
   if (!birthday.birthYear) return null;
 
   const today = new Date();
@@ -20,19 +20,4 @@ export function getNewAge(birthday: Birthday): number | null {
   }
 
   return newAge;
-}
-
-export function getDaysUntilBirthday(birthday: Birthday): number {
-  const today = new Date();
-  today.setUTCHours(0);
-  today.setUTCMinutes(0);
-  today.setUTCSeconds(0, 0);
-  const nextBirthday = new Date(Date.UTC(today.getUTCFullYear(), birthday.month - 1, birthday.day));
-
-  if (nextBirthday < today) {
-    nextBirthday.setUTCFullYear(nextBirthday.getUTCFullYear() + 1);
-  }
-
-  const timeDifference = nextBirthday.getTime() - today.getTime();
-  return Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 }

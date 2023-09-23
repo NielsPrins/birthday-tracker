@@ -4,7 +4,8 @@ import { useState } from 'react';
 import styles from '@/src/app/_birthday-overview/birthday-overview.module.css';
 import Link from 'next/link';
 import { BirthdayWithId } from '@/src/database/models/birthday';
-import { getDaysUntilBirthday, getNewAge } from '@/src/app/_birthday-overview/birthdays-overview-functions';
+import getNewAge from '@/src/functions/get-new-age';
+import getDaysUntilBirthday from '@/src/functions/get-days-until-birthday';
 
 type Props = {
   birthdays: BirthdayWithId[];
