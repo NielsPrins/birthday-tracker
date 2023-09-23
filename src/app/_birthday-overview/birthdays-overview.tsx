@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import styles from '@/src/app/birthday-overview.module.css';
+import styles from '@/src/app/_birthday-overview/birthday-overview.module.css';
 import Link from 'next/link';
 import { BirthdayWithId } from '@/src/database/models/birthday';
-import { getDaysUntilBirthday, getNewAge } from '@/src/app/birthdays-overview-functions';
+import { getDaysUntilBirthday, getNewAge } from '@/src/app/_birthday-overview/birthdays-overview-functions';
 
 type Props = {
   birthdays: BirthdayWithId[];

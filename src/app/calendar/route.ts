@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import getMongoCollection from '@/src/database/db';
 import Setting from '@/src/database/models/setting';
 import { getBirthdays } from '@/src/app/get-birthdays';
-import { getNewAge } from '@/src/app/birthdays-overview-functions';
+import { getNewAge } from '@/src/app/_birthday-overview/birthdays-overview-functions';
 import moment from 'moment';
 
 const defaultEvent = {
