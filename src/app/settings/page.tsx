@@ -1,6 +1,7 @@
 import getMongoCollection from '@/src/db';
 import Setting from '@/src/database/models/setting';
 import Settings from '@/src/app/settings/settings';
+import { headers } from 'next/headers';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,9 +14,14 @@ async function getCalendarApiToken() {
 export default async function SettingsPage() {
   const calendarApiToken = await getCalendarApiToken();
 
+  const url = `${headers().get('x-forwarded-proto') ? 'https://' : 'http://'}${headers().get('host')}`;
+  const calendarUrl = new URL(url);
+  calendarUrl.pathname = 'calendar';
+  calendarUrl.searchParams.set('token', calendarApiToken);
+
   return (
     <main>
-      <Settings calendarApiToken={calendarApiToken}></Settings>
+      <Settings calendarUrl={String(calendarUrl)}></Settings>
     </main>
   );
 }
