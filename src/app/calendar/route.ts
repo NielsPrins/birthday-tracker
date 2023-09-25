@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
   const settingsCollection = await getMongoCollection('settings');
   const calendarApiTokenSetting = await settingsCollection.findOne<Setting>({ key: 'calendarApiToken' });
   if (!calendarApiTokenSetting || calendarToken !== calendarApiTokenSetting.value) {
-    return NextResponse.error();
+    return NextResponse.json({ error: 'Invalid calendar token' }, { status: 500 });
   }
 
   const now = new Date();
@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
     createEvents(birthdayEvents, (error, value) => {
       if (error) {
         console.error(error);
-        return NextResponse.error();
+        return NextResponse.json({ error: error }, { status: 500 });
       }
 
       resolve(value);
