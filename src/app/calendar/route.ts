@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
 
     return {
       ...defaultEvent,
-      uid: `${birthday.id} ${newAge}`,
+      uid: `${birthday.id}${newAge}`,
       start: [nextBirthday.getUTCFullYear(), nextBirthday.getUTCMonth() + 1, nextBirthday.getUTCDate()],
       end: [nextBirthday.getUTCFullYear(), nextBirthday.getUTCMonth() + 1, nextBirthday.getUTCDate() + 1],
       title: `${birthday.name}${newAge ? ` (${newAge})` : ''}`,
