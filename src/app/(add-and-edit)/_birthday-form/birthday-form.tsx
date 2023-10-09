@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './birthday-form.module.css';
 import { addOrEditBirthday, deleteBirthday } from '@/src/app/(add-and-edit)/_birthday-form/actions';
 import { BirthdayWithId } from '@/src/database/models/birthday';
@@ -13,9 +13,13 @@ export default function BirthdayForm(props: FormProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const inputMonth = useRef<HTMLInputElement>(null);
-  const inputBirthYear = useRef<HTMLInputElement>(null);
-  const saveButton = useRef<HTMLButtonElement>(null);
+  const nameInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (props.birthday?.id === undefined && nameInputRef.current) {
+      nameInputRef.current.focus();
+    }
+  }, [props.birthday?.id]);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -53,32 +57,11 @@ export default function BirthdayForm(props: FormProps) {
     }
   }
 
-  function inputKeyup(e: React.KeyboardEvent<HTMLInputElement>, input: 'day' | 'month' | 'birthYear') {
-    if (isNaN(Number(e.key))) return;
-    const eventTarget = e.target as HTMLInputElement;
-    const value = Number(eventTarget.value);
-    const valueLength = eventTarget.value.length;
-
-    if (input === 'day') {
-      if (valueLength === 2 || (valueLength < 2 && value > 3)) {
-        inputMonth.current?.select();
-      }
-    } else if (input === 'month') {
-      if (valueLength === 2 || (valueLength < 2 && value > 1)) {
-        inputBirthYear.current?.select();
-      }
-    } else if (input === 'birthYear') {
-      if (valueLength === 4) {
-        saveButton.current?.focus();
-      }
-    }
-  }
-
   return (
     <form onSubmit={onSubmit}>
       {error && <div>Something went wrong.</div>}
 
-      <input type='text' placeholder='Name' name='name' autoFocus defaultValue={props.birthday?.name} />
+      <input type='text' placeholder='Name' name='name' ref={nameInputRef} defaultValue={props.birthday?.name} />
       <div className={styles.dayAndMonthContainer}>
         <input
           className={styles.dayAndMonthInput}
@@ -88,30 +71,25 @@ export default function BirthdayForm(props: FormProps) {
           name='day'
           autoCapitalize='words'
           defaultValue={props.birthday?.day}
-          onKeyUp={(e) => inputKeyup(e, 'day')}
         />
         <input
-          ref={inputMonth}
           className={styles.dayAndMonthInput}
           type='number'
           pattern='[0-9]*'
           placeholder='Month'
           name='month'
           defaultValue={props.birthday?.month}
-          onKeyUp={(e) => inputKeyup(e, 'month')}
         />
       </div>
       <input
-        ref={inputBirthYear}
         type='number'
         pattern='[0-9]*'
         placeholder='Birth year'
         name='birthYear'
         defaultValue={props.birthday?.birthYear ?? undefined}
-        onKeyUp={(e) => inputKeyup(e, 'birthYear')}
       />
 
-      <button ref={saveButton} type='submit' className='fill'>
+      <button type='submit' className='fill'>
         {props.birthday ? 'Save' : 'Add'}
       </button>
 

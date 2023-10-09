@@ -1,11 +1,19 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import login from '@/src/app/(auth)/login/login';
 
 export default function Form() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const passwordInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (passwordInputRef.current) {
+      passwordInputRef.current.focus();
+    }
+  }, []);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -28,7 +36,7 @@ export default function Form() {
     <form onSubmit={onSubmit}>
       {error && <div>Something went wrong.</div>}
 
-      <input type='password' placeholder='Password' name='password' autoFocus />
+      <input type='password' placeholder='Password' name='password' ref={passwordInputRef} />
       <button type='submit' className='fill'>
         Login
       </button>

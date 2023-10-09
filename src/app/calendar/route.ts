@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import getMongoCollection from '@/src/database/db';
 import Setting from '@/src/database/models/setting';
 import { getBirthdays } from '@/src/app/get-birthdays';
-import moment from 'moment';
 import getNewAge from '@/src/functions/get-new-age';
 
 const defaultEvent = {
@@ -42,7 +41,6 @@ export async function GET(req: NextRequest) {
       start: [nextBirthday.getUTCFullYear(), nextBirthday.getUTCMonth() + 1, nextBirthday.getUTCDate()],
       end: [nextBirthday.getUTCFullYear(), nextBirthday.getUTCMonth() + 1, nextBirthday.getUTCDate() + 1],
       title: `${birthday.name}${newAge ? ` (${newAge})` : ''}`,
-      description: `Last sync on: ${moment(now).format('DD MMMM YYYY HH:mm')}`,
     };
   });
 
