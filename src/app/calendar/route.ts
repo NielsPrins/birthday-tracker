@@ -20,7 +20,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid calendar token' }, { status: 500 });
   }
 
-  const now = new Date();
   const birthdays = await getBirthdays();
   const birthdayEvents = birthdays.map((birthday): EventAttributes => {
     const newAge = getNewAge(birthday);
