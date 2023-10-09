@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { BirthdayWithId } from '@/src/database/models/birthday';
 import getNewAge from '@/src/functions/get-new-age';
 import getDaysUntilBirthday from '@/src/functions/get-days-until-birthday';
+import { isMobile } from '@/src/functions/is-mobile';
 
 type Props = {
   birthdays: BirthdayWithId[];
@@ -18,7 +19,7 @@ export default function BirthdaysOverview(props: Props) {
 
   useEffect(() => {
     const handleKeydown = (event: KeyboardEvent) => {
-      if (event.key !== '/') return;
+      if (event.key !== '/' || isMobile()) return;
 
       const searchInput = searchInputRef.current;
       if (searchInput && document.activeElement !== searchInput) {

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import login from '@/src/app/(auth)/login/login';
+import { isMobile } from '@/src/functions/is-mobile';
 
 export default function Form() {
   const [loading, setLoading] = useState(false);
@@ -10,7 +11,7 @@ export default function Form() {
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (passwordInputRef.current) {
+    if (passwordInputRef.current && !isMobile()) {
       passwordInputRef.current.focus();
     }
   }, []);

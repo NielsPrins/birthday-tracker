@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './birthday-form.module.css';
 import { addOrEditBirthday, deleteBirthday } from '@/src/app/(add-and-edit)/_birthday-form/actions';
 import { BirthdayWithId } from '@/src/database/models/birthday';
+import { isMobile } from '@/src/functions/is-mobile';
 
 interface FormProps {
   birthday?: BirthdayWithId;
@@ -17,7 +18,7 @@ export default function BirthdayForm(props: FormProps) {
   const nameInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (props.birthday?.id === undefined && nameInputRef.current) {
+    if (props.birthday?.id === undefined && nameInputRef.current && !isMobile()) {
       nameInputRef.current.focus();
     }
   }, [props.birthday?.id]);
