@@ -17,3 +17,13 @@
 .deleteButton:focus {
   box-shadow: 0 0 0 3px hsla(0, 100%, 67%, 0.5);
 }
+
+.deleteConfirmationButton {
+  background-color: hsl(0, 66%, 51%);
+  color: #ffffff;
+}
+
+.deleteConfirmationButton:hover,
+.deleteConfirmationButton:focus {
+  box-shadow: 0 0 0 3px hsla(0, 66%, 51%, 0.5);
+}

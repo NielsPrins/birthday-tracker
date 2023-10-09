@@ -12,6 +12,7 @@ interface FormProps {
 export default function BirthdayForm(props: FormProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
   const nameInputRef = useRef<HTMLInputElement>(null);
 
@@ -41,6 +42,22 @@ export default function BirthdayForm(props: FormProps) {
   async function deleteBirthdayClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
 
+    if (!showConfirmDelete) {
+      (e.target as HTMLButtonElement).blur();
+
+      setTimeout(() => {
+        setShowConfirmDelete(true);
+
+        setTimeout(() => {
+          setShowConfirmDelete(false);
+        }, 1750);
+      }, 750);
+    } else {
+      await deleteConfirmBirthdayClick();
+    }
+  }
+
+  async function deleteConfirmBirthdayClick() {
     if (loading) return;
 
     const birthdayId = props.birthday?.id;
@@ -94,8 +111,11 @@ export default function BirthdayForm(props: FormProps) {
       </button>
 
       {props.birthday && (
-        <button onClick={deleteBirthdayClick} className={styles.deleteButton}>
-          Delete
+        <button
+          onClick={deleteBirthdayClick}
+          className={`${styles.deleteButton} ${showConfirmDelete ? styles.deleteConfirmationButton : ''}`}
+        >
+          {!showConfirmDelete ? 'Delete' : 'Click to confirm deletion'}
         </button>
       )}
     </form>
