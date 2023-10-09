@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import getMongoCollection from '@/src/database/db';
 import generateBase64ID from '@/src/functions/generate-base-64-id';
+import { revalidatePath } from 'next/cache';
 
 export async function deleteTokenCookie() {
   cookies().delete('token');
@@ -15,6 +16,8 @@ export async function resetCalendarToken() {
   const calendarApiToken = generateBase64ID(20);
 
   await settingsCollection.findOneAndUpdate({ key: 'calendarApiToken' }, { $set: { key: 'calendarApiToken', value: calendarApiToken } });
+
+  revalidatePath('/settings');
   redirect('/settings');
 }
 
