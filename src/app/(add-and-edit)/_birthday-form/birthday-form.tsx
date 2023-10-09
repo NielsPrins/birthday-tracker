@@ -44,7 +44,7 @@ export default function BirthdayForm(props: FormProps) {
     e.preventDefault();
 
     if (!showConfirmDelete) {
-      (e.target as HTMLButtonElement).blur();
+      e.currentTarget.blur();
 
       setTimeout(() => {
         setShowConfirmDelete(true);
@@ -112,10 +112,7 @@ export default function BirthdayForm(props: FormProps) {
       </button>
 
       {props.birthday && (
-        <button
-          onClick={deleteBirthdayClick}
-          className={`${styles.deleteButton} ${showConfirmDelete ? styles.deleteConfirmationButton : ''}`}
-        >
+        <button onClick={deleteBirthdayClick} className={`danger ${showConfirmDelete ? 'dangerConfirm' : ''}`}>
           {!showConfirmDelete ? 'Delete' : 'Click to confirm deletion'}
         </button>
       )}

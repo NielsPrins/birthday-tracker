@@ -87,6 +87,10 @@ button {
   cursor: pointer;
 }
 
+a.button, button {
+  font-weight: 500;
+}
+
 input:focus,
 button:hover,
 button:focus,
@@ -106,3 +110,29 @@ a.button.fill:hover,
 a.button.fill:focus {
   box-shadow: 0 0 0 3px hsla(var(--primary-color-h), var(--primary-color-s), var(--primary-color-l), 0.5);
 }
+
+button.danger, a.button.danger {
+  background-color: hsl(0, 100%, 67%);
+  color: #ffffff;
+}
+
+button.danger:hover,
+button.danger:focus,
+a.button.danger:hover,
+a.button.danger:focus {
+  box-shadow: 0 0 0 3px hsla(0, 100%, 67%, 0.35);
+}
+
+button.dangerConfirm,
+a.button.dangerConfirm {
+  background-color: hsl(0, 66%, 51%);
+  color: #ffffff;
+}
+
+button.dangerConfirm:hover,
+button.dangerConfirm:focus,
+a.button.dangerConfirm:hover,
+a.button.dangerConfirm:focus {
+  box-shadow: 0 0 0 3px hsla(0, 66%, 51%, 0.25);
+}
+
