@@ -4,6 +4,7 @@ import getMongoCollection from '@/src/database/db';
 import Setting from '@/src/database/models/setting';
 import { getBirthdays } from '@/src/app/get-birthdays';
 import getNewAge from '@/src/functions/get-new-age';
+import crc32 from 'crc/crc32';
 
 const defaultEvent = {
   productId: 'birthday-tracker',
@@ -34,9 +35,11 @@ export async function GET(req: NextRequest) {
       nextBirthday.setUTCFullYear(nextBirthday.getUTCFullYear() + 1);
     }
 
+    const dataHash = crc32(`${birthday.name}${birthday.day}${birthday.month}${birthday.birthYear}${birthday.thisYear}`).toString(16);
+
     return {
       ...defaultEvent,
-      uid: `${birthday.id}${newAge}`,
+      uid: `${birthday.id}${dataHash}`,
       start: [nextBirthday.getUTCFullYear(), nextBirthday.getUTCMonth() + 1, nextBirthday.getUTCDate()],
       end: [nextBirthday.getUTCFullYear(), nextBirthday.getUTCMonth() + 1, nextBirthday.getUTCDate() + 1],
       title: `${birthday.name}${newAge ? ` (${newAge})` : ''}`,

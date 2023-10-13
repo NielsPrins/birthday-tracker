@@ -13,6 +13,7 @@
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "bcrypt": "^5.1.1",
+    "crc": "^4.3.2",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "ics": "^3.5.0",

@@ -1,15 +1,15 @@
 'use server';
 
 import getMongoCollection from '@/src/database/db';
-import { BirthdayWithId } from '@/src/database/models/birthday';
+import { BirthdayWithIdAndThisYear } from '@/src/database/models/birthday';
 
-export async function getBirthdays(): Promise<BirthdayWithId[]> {
+export async function getBirthdays(): Promise<BirthdayWithIdAndThisYear[]> {
   const today = new Date();
 
   const birthdaysCollection = await getMongoCollection('birthdays');
 
   return await birthdaysCollection
-    .aggregate<BirthdayWithId>([
+    .aggregate<BirthdayWithIdAndThisYear>([
       {
         $project: {
           _id: 0,
