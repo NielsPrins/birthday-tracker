@@ -46,9 +46,10 @@
   gap: 0.5em;
 }
 
-.birthday:hover {
+.birthday:hover, .birthday:focus {
   background-color: var(--primary-color);
   border-radius: 0.25rem;
+  outline: 0;
 }
 
 .birthdayName {
