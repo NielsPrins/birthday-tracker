@@ -14,7 +14,7 @@ async function getCalendarApiToken() {
 export default async function SettingsPage() {
   const calendarApiToken = await getCalendarApiToken();
 
-  const url = `${headers().get('x-forwarded-proto') ? 'https://' : 'http://'}${headers().get('host')}`;
+  const url = `${headers().get('x-forwarded-proto')}://${headers().get('host')}`;
   const calendarUrl = new URL(url);
   calendarUrl.pathname = 'calendar';
   calendarUrl.searchParams.set('token', calendarApiToken);
