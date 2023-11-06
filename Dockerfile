@@ -12,7 +12,6 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
-ENV MONGODB_URI "mongodb://birthday-tracker-mongodb:27017/db"
 
 RUN yarn build
 
