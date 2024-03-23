@@ -1,7 +1,7 @@
 import { createEvents, EventAttributes } from 'ics';
 import { NextRequest, NextResponse } from 'next/server';
 import getMongoCollection from '@/src/database/db';
-import Setting from '@/src/database/models/setting';
+import { Setting } from '@/src/database/models/setting';
 import { getBirthdays } from '@/src/app/get-birthdays';
 import getNewAge from '@/src/functions/get-new-age';
 import crc32 from 'crc/crc32';
@@ -12,7 +12,7 @@ const defaultEvent = {
 };
 
 export async function GET(req: NextRequest) {
-  const url = new URL(req.url ?? '');
+  const url = new URL(req.url);
   const calendarToken = url.searchParams.get('token');
 
   const settingsCollection = await getMongoCollection('settings');

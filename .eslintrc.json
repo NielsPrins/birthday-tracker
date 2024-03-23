@@ -3,13 +3,19 @@
     "@typescript-eslint"
   ],
   "extends": [
+    "eslint:recommended",
     "next/core-web-vitals",
+    "prettier",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "plugin:@typescript-eslint/strict-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked"
   ],
   "rules": {
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/array-type": "error"
+    "semi": "error",
+    "@typescript-eslint/no-confusing-void-expression": "off",
+    "@typescript-eslint/restrict-template-expressions": "off"
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
   }
 }

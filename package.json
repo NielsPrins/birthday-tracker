@@ -15,7 +15,7 @@
     "bcrypt": "^5.1.1",
     "crc": "^4.3.2",
     "eslint": "^8.53.0",
-    "eslint-config-next": "^14.0.1",
+    "eslint-config-next": "^14.1.0",
     "ics": "^3.5.0",
     "jose": "^5.1.0",
     "moment": "^2.29.4",
@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.6.0",
-    "eslint-config-prettier": "^9.0.0",
-    "prettier": "^3.0.3"
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5"
   }
 }

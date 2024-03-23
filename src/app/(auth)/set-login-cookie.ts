@@ -13,7 +13,7 @@ export async function setLoginCookie() {
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
     .setIssuer('birthday-tracker')
-    .setExpirationTime(tokenMaxAge + 's')
+    .setExpirationTime(`${tokenMaxAge}s`)
     .sign(new TextEncoder().encode(secret));
 
   cookies().set({

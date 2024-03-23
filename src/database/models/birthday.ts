@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 
-export default interface Birthday {
+export interface Birthday {
   _id?: ObjectId;
   name: string;
   day: number;

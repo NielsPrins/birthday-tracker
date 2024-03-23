@@ -9,6 +9,7 @@ const uri = process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/db';
 let client;
 let clientPromise: Promise<MongoClient>;
 if (process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition,@typescript-eslint/no-misused-promises
   if (!globalForMongo._mongoClientPromise) {
     client = new MongoClient(uri);
     globalForMongo._mongoClientPromise = client.connect();

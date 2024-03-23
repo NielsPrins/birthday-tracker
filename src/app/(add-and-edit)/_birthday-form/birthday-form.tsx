@@ -23,7 +23,7 @@ export default function BirthdayForm(props: FormProps) {
     }
   }, [props.birthday?.id]);
 
-  async function onSubmit(e: React.FormEvent) {
+  function onSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     if (loading) return;
@@ -32,15 +32,15 @@ export default function BirthdayForm(props: FormProps) {
 
     const formData = new FormData(e.target as HTMLFormElement);
 
-    try {
-      await addOrEditBirthday(formData, props.birthday?.id);
-    } catch (e) {
-      setLoading(false);
-      setError(true);
-    }
+    addOrEditBirthday(formData, props.birthday?.id)
+      .then()
+      .catch(() => {
+        setLoading(false);
+        setError(true);
+      });
   }
 
-  async function deleteBirthdayClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  function deleteBirthdayClick(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
     if (!showConfirmDelete) {
@@ -54,11 +54,11 @@ export default function BirthdayForm(props: FormProps) {
         }, 1750);
       }, 750);
     } else {
-      await deleteConfirmBirthdayClick();
+      deleteConfirmBirthdayClick();
     }
   }
 
-  async function deleteConfirmBirthdayClick() {
+  function deleteConfirmBirthdayClick() {
     if (loading) return;
 
     const birthdayId = props.birthday?.id;
@@ -67,12 +67,12 @@ export default function BirthdayForm(props: FormProps) {
     setLoading(true);
     setError(false);
 
-    try {
-      await deleteBirthday(birthdayId);
-    } catch (e) {
-      setLoading(false);
-      setError(true);
-    }
+    deleteBirthday(birthdayId)
+      .then()
+      .catch(() => {
+        setLoading(false);
+        setError(true);
+      });
   }
 
   return (

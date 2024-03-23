@@ -3,12 +3,13 @@
 import { deleteTokenCookie, resetCalendarToken, resetPassword } from '@/src/app/settings/actions';
 import React, { useState } from 'react';
 
-type Props = {
+interface Props {
   calendarUrl: string;
-};
+}
 
 export default function Settings(props: Props) {
   const [dangerConfirmationState, setDangerConfirmationState] = useState<null | 'calendar-token' | 'password'>(null);
+  const [error, setError] = useState(false);
 
   let setDangerStateTimeout: ReturnType<typeof setTimeout> | null = null;
   let resetDangerStateTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -17,8 +18,8 @@ export default function Settings(props: Props) {
     e.currentTarget.select();
   };
 
-  const logoutClick = async () => {
-    await deleteTokenCookie();
+  const logoutClick = () => {
+    deleteTokenCookie();
   };
 
   const resetClick = (e: React.MouseEvent<HTMLButtonElement>, type: 'calendar-token' | 'password') => {
@@ -38,9 +39,17 @@ export default function Settings(props: Props) {
       }, 750);
     } else {
       if (type == 'calendar-token') {
-        resetCalendarToken();
-      } else if (type == 'password') {
-        resetPassword();
+        resetCalendarToken()
+          .then()
+          .catch(() => {
+            setError(true);
+          });
+      } else {
+        resetPassword()
+          .then()
+          .catch(() => {
+            setError(true);
+          });
       }
     }
   };
@@ -50,6 +59,8 @@ export default function Settings(props: Props) {
       <h1>Settings</h1>
 
       <div>Show your birthdays in your calendar app by connecting birthday-tracker using the following URL.</div>
+
+      {error && <div>Something went wrong.</div>}
 
       <input defaultValue={props.calendarUrl} readOnly onClick={calendarUrlInputClick}></input>
 

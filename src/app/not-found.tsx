@@ -1,6 +1,6 @@
 import styles from './not-found.module.css';
 
-export default async function Home() {
+export default function Home() {
   return (
     <main>
       <div className={styles.headerContainer}>

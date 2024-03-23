@@ -1,4 +1,4 @@
-import Birthday from '@/src/database/models/birthday';
+import { Birthday } from '@/src/database/models/birthday';
 
 export default function getNewAge(birthday: Birthday): number | null {
   if (!birthday.birthYear) return null;

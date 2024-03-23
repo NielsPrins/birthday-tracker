@@ -16,7 +16,7 @@ export default function Form() {
     }
   }, []);
 
-  async function onSubmit(e: React.FormEvent) {
+  function onSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     if (loading) return;
@@ -25,12 +25,12 @@ export default function Form() {
 
     const formData = new FormData(e.target as HTMLFormElement);
 
-    try {
-      await register(formData);
-    } catch (e) {
-      setLoading(false);
-      setError(true);
-    }
+    register(formData)
+      .then()
+      .catch(() => {
+        setLoading(false);
+        setError(true);
+      });
   }
 
   return (

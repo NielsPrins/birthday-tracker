@@ -1,4 +1,4 @@
-import Birthday from '@/src/database/models/birthday';
+import { Birthday } from '@/src/database/models/birthday';
 
 export default function getDaysUntilBirthday(birthday: Birthday): number {
   const today = new Date();

@@ -8,9 +8,9 @@ import getNewAge from '@/src/functions/get-new-age';
 import getDaysUntilBirthday from '@/src/functions/get-days-until-birthday';
 import { isMobile } from '@/src/functions/is-mobile';
 
-type Props = {
+interface Props {
   birthdays: BirthdayWithIdAndThisYear[];
-};
+}
 
 export default function BirthdaysOverview(props: Props) {
   const [search, setSearch] = useState('');

@@ -1,6 +1,6 @@
 import getMongoCollection from '@/src/database/db';
 import { redirect } from 'next/navigation';
-import Setting from '@/src/database/models/setting';
+import { Setting } from '@/src/database/models/setting';
 import Form from '@/src/app/(auth)/login/form';
 
 export const dynamic = 'force-dynamic';
