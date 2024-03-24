@@ -6,7 +6,7 @@ import getMongoCollection from '@/src/database/db';
 import generateBase64ID from '@/src/functions/generate-base-64-id';
 import { revalidatePath } from 'next/cache';
 
-export function deleteTokenCookie() {
+export async function deleteTokenCookie() {
   cookies().delete('token');
   redirect('/');
 }
