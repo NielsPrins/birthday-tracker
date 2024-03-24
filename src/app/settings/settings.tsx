@@ -19,7 +19,11 @@ export default function Settings(props: Props) {
   };
 
   const logoutClick = () => {
-    deleteTokenCookie();
+    deleteTokenCookie()
+      .then()
+      .catch(() => {
+        setError(true);
+      });
   };
 
   const resetClick = (e: React.MouseEvent<HTMLButtonElement>, type: 'calendar-token' | 'password') => {
