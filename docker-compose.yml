@@ -8,7 +8,7 @@ services:
     depends_on:
       - mongodb
     environment:
-      - MONGODB_URI=mongodb://birthday-tracker-mongodb:27017/db
+      - MONGODB_URI=mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@birthday-tracker-mongodb:27017
   mongodb:
     image: mongo
     container_name: birthday-tracker-mongodb
@@ -16,6 +16,10 @@ services:
       - '27017:27017'
     volumes:
       - mongodb:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+    command: mongod
 
 volumes:
   mongodb:
