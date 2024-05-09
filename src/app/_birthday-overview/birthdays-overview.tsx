@@ -80,7 +80,7 @@ export default function BirthdaysOverview(props: Props) {
             return (
               <div key={birthday.id} className={`${styles.birthdayContainer} ${birthday.hidden ? styles.hidden : ''}`}>
                 <div className={styles.birthdayContainerContent}>
-                  <Link href={`edit/${birthday.id}`} className={styles.birthday}>
+                  <Link href={`edit/${birthday.id}`} className={styles.birthday} tabIndex={birthday.hidden ? -1 : undefined}>
                     <div>
                       <div className={styles.birthdayName}>{birthday.name}</div>
                       {newAge && <div>{newAge} years</div>}
